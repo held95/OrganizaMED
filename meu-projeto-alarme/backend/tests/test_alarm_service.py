@@ -29,10 +29,18 @@ def test_run_returns_ok_response():
 
 
 def test_run_respects_cooldown():
+    from backend.app.models import AlarmResponse
+    from datetime import datetime as dt
+
     mod = _reload()
     recent = datetime.now() - timedelta(minutes=30)
-    mock_prev = MagicMock()
-    mock_prev.status = "ok"
+    mock_prev = AlarmResponse(
+        status="ok",
+        count_calls=3,
+        slack_sent=True,
+        duration_ms=100,
+        timestamp=dt.now(),
+    )
     mod._last_execution = recent
     mod._last_result = mock_prev
 
@@ -60,9 +68,18 @@ def test_run_handles_db_error():
 
 
 def test_get_status_reflects_cooldown():
+    from backend.app.models import AlarmResponse
+    from datetime import datetime as dt
+
     mod = _reload()
     mod._last_execution = datetime.now() - timedelta(minutes=20)
-    mod._last_result = MagicMock()
+    mod._last_result = AlarmResponse(
+        status="ok",
+        count_calls=0,
+        slack_sent=True,
+        duration_ms=50,
+        timestamp=dt.now(),
+    )
 
     status = mod.get_status()
     assert status.cooldown_active is True

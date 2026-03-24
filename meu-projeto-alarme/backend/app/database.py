@@ -30,6 +30,9 @@ class DatabaseManager:
         logger.info(f"DB pool initialized: {settings.db_host}:{settings.db_port}/{settings.db_name}")
 
     def close_pool(self):
+        # Note: mysql-connector-python's MySQLConnectionPool does not expose a close()
+        # method. Dropping the reference lets GC reclaim it, but open server-side
+        # connections will remain until MySQL's wait_timeout (default: 8h) elapses.
         if self._pool:
             self._pool = None
             logger.info("DB pool closed")
@@ -52,6 +55,9 @@ class DatabaseManager:
             if conn:
                 conn.rollback()
             logger.error(f"Database error: {e}")
+            raise
+        except Exception as e:
+            logger.error(f"Unexpected database error: {e}")
             raise
         finally:
             if cursor:

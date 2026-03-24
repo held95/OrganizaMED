@@ -3,13 +3,7 @@ import hmac
 
 from fastapi import Header, HTTPException
 
-
-def __getattr__(name: str):
-    """Lazy module-level attribute access to allow test patching of settings."""
-    if name == "settings":
-        from .config import settings as _s
-        return _s
-    raise AttributeError(name)
+from .config import settings
 
 
 def verify_api_key(x_api_key: str = Header(...)) -> None:

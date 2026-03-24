@@ -48,7 +48,7 @@ def test_run_respects_cooldown():
         result = mod.run()
         # Should NOT hit the DB
         mock_db.count_today_calls.assert_not_called()
-        assert result == mock_prev
+        assert result is mock_prev  # exact same cached object, not just equal values
 
 
 def test_run_handles_db_error():

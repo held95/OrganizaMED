@@ -27,6 +27,9 @@ def run() -> AlarmResponse:
     """Execute the daily alarm: query DB, send Slack, return result."""
     global _last_execution, _last_result
 
+    # Both conditions needed: cooldown time passed AND a result was cached.
+    # In practice, _last_result is always set alongside _last_execution, so
+    # the second condition is a safety guard against corrupted state.
     if _is_in_cooldown() and _last_result is not None:
         logger.info("Cooldown active — returning cached result")
         return _last_result
@@ -57,6 +60,8 @@ def run() -> AlarmResponse:
         return result
 
     slack_sent = slack_service.send_success(count)
+    # Note: send_success() swallows all exceptions and returns False on any failure,
+    # so no try/except is needed here. State is always updated below.
     duration_ms = int((time.monotonic() - start) * 1000)
 
     result = AlarmResponse(

@@ -1,5 +1,4 @@
 from datetime import datetime
-import pytest
 
 
 def test_alarm_response_ok():

@@ -15,7 +15,7 @@ class AlarmResponse(BaseModel):
 
 
 class StatusResponse(BaseModel):
-    last_execution: Optional[datetime]
-    last_result: Optional[AlarmResponse]
+    last_execution: Optional[datetime] = None
+    last_result: Optional[AlarmResponse] = None
     cooldown_active: bool
-    cooldown_remaining_seconds: Optional[int]
+    cooldown_remaining_seconds: Optional[int] = None

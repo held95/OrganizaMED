@@ -1,8 +1,9 @@
 """Pydantic response models for Alarm API."""
 from datetime import datetime
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel
+from pydantic import ConfigDict
 
 
 class AlarmResponse(BaseModel):
@@ -15,7 +16,9 @@ class AlarmResponse(BaseModel):
 
 
 class StatusResponse(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     last_execution: Optional[datetime] = None
-    last_result: Optional[AlarmResponse] = None
+    last_result: Optional[Any] = None
     cooldown_active: bool
     cooldown_remaining_seconds: Optional[int] = None

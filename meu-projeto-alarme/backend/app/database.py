@@ -57,6 +57,8 @@ class DatabaseManager:
             logger.error(f"Database error: {e}")
             raise
         except Exception as e:
+            if conn:
+                conn.rollback()
             logger.error(f"Unexpected database error: {e}")
             raise
         finally:

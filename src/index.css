@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource-variable/plus-jakarta-sans";
+
+@theme {
+  --color-navy: #0d1b2a;
+  --color-navy-light: #1b2d45;
+  --color-navy-dark: #091520;
+  --color-teal: #2ca24c;
+  --color-teal-light: #3dbd61;
+  --color-teal-dark: #237a3a;
+  --color-teal-50: #f0fdf4;
+  --color-teal-100: #dcfce7;
+  --color-offwhite: #f4f6f8;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans Variable", "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply font-sans text-gray-900 bg-offwhite antialiased;
+  }
+
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  .dark ::selection {
+    @apply bg-teal/30 text-white;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

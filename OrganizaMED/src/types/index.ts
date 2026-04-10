@@ -35,7 +35,6 @@ export interface HowItWorksStep {
 
 export interface Publication {
   title: string
-  description: string
   pdfUrl: string
 }
 

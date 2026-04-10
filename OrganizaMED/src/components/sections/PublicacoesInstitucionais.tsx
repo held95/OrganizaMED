@@ -32,13 +32,9 @@ export default function PublicacoesInstitucionais() {
                   <FileText size={32} className="text-teal" />
                 </div>
 
-                <h3 className="mb-2 text-center font-heading text-lg font-bold text-gray-900 dark:text-gray-100">
+                <h3 className="mb-6 text-center font-heading text-lg font-bold text-gray-900 dark:text-gray-100">
                   {pub.title}
                 </h3>
-
-                <p className="mb-6 text-center text-sm text-gray-500 dark:text-gray-400">
-                  {pub.description}
-                </p>
 
                 <span className="inline-flex items-center gap-2 rounded-lg bg-teal px-5 py-2.5 font-semibold text-white transition-all duration-200 group-hover:bg-teal-dark group-hover:scale-[1.02]">
                   Abrir Documento

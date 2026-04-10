@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, FileText } from 'lucide-react'
+import { publications } from '../../data/publications'
 
 export default function ComunicadoModal() {
   const [isOpen, setIsOpen] = useState(true)
@@ -21,7 +22,7 @@ export default function ComunicadoModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-gray-800"
+            className="relative mx-4 w-full max-w-lg rounded-2xl bg-white p-8 shadow-2xl dark:bg-gray-800"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -33,26 +34,32 @@ export default function ComunicadoModal() {
             </button>
 
             <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-teal/10">
-                <FileText size={32} className="text-teal" />
-              </div>
-
               <h2 className="mb-2 font-heading text-2xl font-bold text-navy dark:text-white">
-                Comunicado
+                Institucional
               </h2>
 
               <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-                Clique no botão abaixo para visualizar o comunicado.
+                Clique em um dos documentos abaixo para visualizar.
               </p>
 
-              <button
-                onClick={() =>
-                  window.open('/comunicado.pdf', '_blank', 'noopener,noreferrer')
-                }
-                className="w-full rounded-lg bg-teal px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-teal-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-              >
-                Abrir Comunicado
-              </button>
+              <div className="flex w-full flex-col gap-4 sm:flex-row">
+                {publications.map((pub) => (
+                  <button
+                    key={pub.pdfUrl}
+                    onClick={() =>
+                      window.open(pub.pdfUrl, '_blank', 'noopener,noreferrer')
+                    }
+                    className="flex flex-1 flex-col items-center gap-3 rounded-xl border border-gray-200 p-5 transition-all duration-200 hover:border-teal hover:bg-teal-50 hover:scale-[1.02] active:scale-[0.98] cursor-pointer dark:border-gray-600 dark:hover:border-teal dark:hover:bg-teal/10"
+                  >
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal/10">
+                      <FileText size={28} className="text-teal" />
+                    </div>
+                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                      {pub.title}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </motion.div>
         </motion.div>

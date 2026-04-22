@@ -9,4 +9,8 @@ export const publications: Publication[] = [
     title: 'Comunicação e Convite',
     pdfUrl: '/comunicado-subscricao.pdf',
   },
+  {
+    title: 'Convocação dia 30',
+    pdfUrl: '/convocacao-30-04-2026.pdf',
+  },
 ]

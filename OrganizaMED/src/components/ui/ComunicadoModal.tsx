@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, FileText } from 'lucide-react'
-import { publications } from '../../data/publications'
 
 export default function ComunicadoModal() {
   const [isOpen, setIsOpen] = useState(true)
@@ -26,6 +25,7 @@ export default function ComunicadoModal() {
             onClick={(e) => e.stopPropagation()}
           >
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300 cursor-pointer"
               aria-label="Fechar comunicado"
@@ -43,22 +43,20 @@ export default function ComunicadoModal() {
               </p>
 
               <div className="flex w-full flex-col gap-4 sm:flex-row">
-                {publications.map((pub) => (
-                  <button
-                    key={pub.pdfUrl}
-                    onClick={() =>
-                      window.open(pub.pdfUrl, '_blank', 'noopener,noreferrer')
-                    }
-                    className="flex flex-1 flex-col items-center gap-3 rounded-xl border border-gray-200 p-5 transition-all duration-200 hover:border-teal hover:bg-teal-50 hover:scale-[1.02] active:scale-[0.98] cursor-pointer dark:border-gray-600 dark:hover:border-teal dark:hover:bg-teal/10"
-                  >
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal/10">
-                      <FileText size={28} className="text-teal" />
-                    </div>
-                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                      {pub.title}
-                    </span>
-                  </button>
-                ))}
+                <button
+                  type="button"
+                  onClick={() =>
+                    window.open('/convocacao-30-04-2026.pdf', '_blank', 'noopener,noreferrer')
+                  }
+                  className="flex flex-1 flex-col items-center gap-3 rounded-xl border border-gray-200 p-5 transition-all duration-200 hover:border-teal hover:bg-teal-50 hover:scale-[1.02] active:scale-[0.98] cursor-pointer dark:border-gray-600 dark:hover:border-teal dark:hover:bg-teal/10"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal/10">
+                    <FileText size={28} className="text-teal" />
+                  </div>
+                  <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                    Convocação dia 30
+                  </span>
+                </button>
               </div>
             </div>
           </motion.div>

@@ -10,7 +10,7 @@ export const publications: Publication[] = [
     pdfUrl: '/comunicado-subscricao.pdf',
   },
   {
-    title: 'Convocação dia 30',
+    title: 'Convocação dia 30 de abril',
     pdfUrl: '/convocacao-30-04-2026.pdf',
   },
 ]

@@ -54,7 +54,7 @@ export default function ComunicadoModal() {
                     <FileText size={28} className="text-teal" />
                   </div>
                   <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                    Convocação dia 30
+                    Convocação dia 30 de abril
                   </span>
                 </button>
               </div>
